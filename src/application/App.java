@@ -37,6 +37,16 @@ public class App {
                 if (capturedPiece != null) {
                     captured.add(capturedPiece);
                 }
+
+                if (chessMatch.getPromoted() != null) {
+                    System.out.print("Enter piece for promotion (B/N/R/Q): ");
+                    String type = sc.nextLine().toUpperCase();
+                    while (!checkPromotedType(type)) {
+                        System.out.print("Invalid value! Enter piece for promotion (B/N/R/Q): ");
+                        type = sc.nextLine().toUpperCase();
+                    }
+                    chessMatch.replacePromotedPiece(type);
+                }
             } catch (ChessException e) {
                 System.out.println(e.getMessage());
                 sc.nextLine();
@@ -48,5 +58,9 @@ public class App {
         UI.clearScreen();
         UI.printMatch(chessMatch, captured);
         
+    }
+
+    private static boolean checkPromotedType(String type) {
+        return type.equals("B") || type.equals("N") || type.equals("R") || type.equals("Q");
     }
 }
