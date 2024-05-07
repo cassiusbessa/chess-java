@@ -55,12 +55,19 @@ public class Board {
         return aux;
     }
 
-    private boolean positionExists(int row, int column) {
+    public boolean positionExists(int row, int column) {
         return row >= 0 && row < rows && column >= 0 && column < columns;
     }
 
     public boolean positionExists(Position position) {
         return position.getRow() >= 0 && position.getRow() < rows && position.getColumn() >= 0 && position.getColumn() < columns;
+    }
+
+    public boolean thereIsAPiece(int row, int column) {
+        if (!positionExists(row, column)) {
+            throw new BoardException("Position not on the board");
+        }
+        return piece(row, column) != null;
     }
 
     public boolean thereIsAPiece(Position position) {
